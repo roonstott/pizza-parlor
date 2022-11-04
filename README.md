@@ -54,6 +54,30 @@ Expected Output:
   toppingIndex: 1
 }
 
+Test: "It should refactor the addTopping(); method so that it doesn't require an ID, or the assign ID method, and will just use the topping.name property as the object key inside of the Pizza.prototype.toppings object."
+Code:
+  let margharita = new Pizza("margharita", size, crust, gF);
+  let artichokes = new Topping("artichokes", 3);
+  let anchovies = new Topping("anchovies", 3.5);
+  let olives = new Topping("olives", 2)
+  margharita.addTopping(artichokes);
+  margharita.addTopping(anchovies);
+  margharita.addTopping(olives);
+  console.log(margharita);
+Expected Output:
+  Pizza {
+  pizza: 'margharita',
+  toppings: {
+    artichokes: Topping { name: 'artichokes', price: 3, id: 'artichokes' },
+    anchovies: Topping { name: 'anchovies', price: 3.5, id: 'anchovies' },
+    olives: Topping { name: 'olives', price: 2, id: 'olives' }
+  },
+  size: Size { size: '18 inch', price: 15 },
+  crust: Crust { crust: 'thick', price: 4 },
+  glutenFree: GlutenFree { glutenFree: false, price: 0 },
+  toppingIndex: 0
+}
+
 Describe: function Size(size, price) 
 Test: "It should create a size object with size and price properties"
 Code: 
@@ -101,18 +125,7 @@ Code:
 }
 
 margharita.totalCost();
-console.log(margharita);
-
-Pizza {
-  pizza: 'margharita',
-  toppings: {
-    '1': Topping { name: 'artichokes', price: 3, id: 1 },
-    '2': Topping { name: 'anchovies', price: 3.5, id: 2 },
-    '3': Topping { name: 'olives', price: 2, id: 3 }
-  },
-  size: Size { size: '18 inch', price: 15 },
-  crust: Crust { crust: 'thick', price: 4 },
-  glutenFree: GlutenFree { glutenFree: false, price: 0 },
-  toppingIndex: 3,
+console.log(margharita.totalCost);
+Expected Output: 
   totalCost: 27.5
-}  ```
+ ```
