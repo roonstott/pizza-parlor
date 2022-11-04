@@ -1,11 +1,12 @@
-Describe: function Pizza(size, crust, glutenFree)
+```Describe: function Pizza(name, size, crust, glutenFree)
 
 Test: "It should create a new pizza object with size, crust, and glutenFree properties, as well as an empty topping object"
 Code: 
-  let margharita = new Pizza("18", "thin", false);
+  let margharita = new Pizza("margharita", "18", "thin", false);
   console.log(margharita);
 Expected Output: 
   Pizza {
+    name: 'margharita',
     toppings: {},
     size: '18',
     crust: 'thin',
@@ -53,4 +54,32 @@ Expected Output:
   toppingIndex: 1
 }
 
-Describe: 
+Describe: function Size(size, price) 
+Test: "It should create a size object with size and price properties"
+Code: 
+  let size = new Size("18 inch", 15);
+  console.log(size);
+Expected Output: 
+  Size { size: '18 inch', price: 15 }
+
+Describe: ^^^ The Crust and GlutenFree constructors are identical to the Size constructor described above, apart from constructor name and first property name, so I won't repeat them ^^^
+
+Describe: Pizza.prototype.toppingCost();
+Test: "It should add up the price properties of each topping contained withing the toppings object of the pizza object, giving a total cost for all the toppings on the pizza" 
+Code: 
+  Pizza {
+  pizza: 'margharita',
+  toppings: {
+    '1': Topping { name: 'artichokes', price: 3, id: 1 },
+    '2': Topping { name: 'anchovies', price: 3.5, id: 2 },
+    '3': Topping { name: 'olives', price: 2, id: 3 }
+  },
+  size: Size { size: '18 inch', price: 15 },
+  crust: Crust { crust: 'thick', price: 4 },
+  glutenFree: GlutenFree { glutenFree: false, price: 0 },
+  toppingIndex: 3
+}
+
+  console.log (margharita.toppingCost());
+
+Expected Output: 8.5 ```
