@@ -41,6 +41,16 @@ Pizza.prototype.assignToppingId = function() {
   return this.toppingIndex;
 }
 
+Pizza.prototype.toppingCost = function () {
+  let totalToppingPrice = 0;
+  let toppings = this.toppings;
+  let array = Object.keys(toppings);
+  array.forEach(function(key){
+    totalToppingPrice += toppings[key].price
+  });
+  return totalToppingPrice;
+}
+
 function Order (name, phone, delivery, gratuity) {
   this.name = name,
   this.phoneNumber = phone,
@@ -69,14 +79,7 @@ margharita.addTopping(artichokes);
 margharita.addTopping(anchovies);
 margharita.addTopping(olives);
 console.log(margharita); 
-
-
-Pizza.prototype.toppingCost = function () {
-  tops = this.toppings[2].price;
-  console.log(tops)
-}
-
-margharita.toppingCost();
+console.log(margharita.toppingCost())
 
 
 

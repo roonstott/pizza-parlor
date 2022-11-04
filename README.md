@@ -65,7 +65,7 @@ Expected Output:
 Describe: ^^^ The Crust and GlutenFree constructors are identical to the Size constructor described above, apart from constructor name and first property name, so I won't repeat them ^^^
 
 Describe: Pizza.prototype.toppingCost();
-Test: "It should add up the price properties of each topping contained withing the toppings object of the pizza object, giving a total cost for all the toppings on the pizza" 
+Test: "It should add up the price properties of each topping contained within the toppings object of the pizza object, giving a total cost for all the toppings on the pizza" 
 Code: 
   Pizza {
   pizza: 'margharita',
