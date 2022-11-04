@@ -82,4 +82,37 @@ Code:
 
   console.log (margharita.toppingCost());
 
-Expected Output: 8.5 ```
+Expected Output: 8.5
+
+Describe: Pizza.prototype.totalcost(); 
+Test: "It should add up all price values in the Pizza object and return a total cost as a new property in the pizza object"
+Code: 
+  Pizza {
+  pizza: 'margharita',
+  toppings: {
+    '1': Topping { name: 'artichokes', price: 3, id: 1 },
+    '2': Topping { name: 'anchovies', price: 3.5, id: 2 },
+    '3': Topping { name: 'olives', price: 2, id: 3 }
+  },
+  size: Size { size: '18 inch', price: 15 },
+  crust: Crust { crust: 'thick', price: 4 },
+  glutenFree: GlutenFree { glutenFree: false, price: 0 },
+  toppingIndex: 3
+}
+
+margharita.totalCost();
+console.log(margharita);
+
+Pizza {
+  pizza: 'margharita',
+  toppings: {
+    '1': Topping { name: 'artichokes', price: 3, id: 1 },
+    '2': Topping { name: 'anchovies', price: 3.5, id: 2 },
+    '3': Topping { name: 'olives', price: 2, id: 3 }
+  },
+  size: Size { size: '18 inch', price: 15 },
+  crust: Crust { crust: 'thick', price: 4 },
+  glutenFree: GlutenFree { glutenFree: false, price: 0 },
+  toppingIndex: 3,
+  totalCost: 27.5
+}  ```

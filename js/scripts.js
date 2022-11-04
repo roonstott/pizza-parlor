@@ -51,6 +51,15 @@ Pizza.prototype.toppingCost = function () {
   return totalToppingPrice;
 }
 
+Pizza.prototype.totalCost = function () {
+  let totalCost = this.toppingCost();
+  totalCost += this.size.price;
+  totalCost += this.crust.price;
+  totalCost += this.glutenFree.price;
+  this.totalCost = totalCost; 
+}
+
+
 function Order (name, phone, delivery, gratuity) {
   this.name = name,
   this.phoneNumber = phone,
@@ -78,10 +87,9 @@ let margharita = new Pizza("margharita", size, crust, gF);
 margharita.addTopping(artichokes);
 margharita.addTopping(anchovies);
 margharita.addTopping(olives);
-console.log(margharita); 
-console.log(margharita.toppingCost())
-
-
+console.log(margharita);
+margharita.totalCost();
+console.log(margharita);
 
 //User Interface Logic
 
