@@ -11,7 +11,7 @@ function Order (name, phone, delivery, gratuity) {
   this.others = {},
   this.delivery = delivery,
   this.gratuity = gratuity
-} //totalCost will be put in with a method, as will price with gratuity
+}
 
 function Pizza(name, size, crust, glutenFree) {
 this.pizza = name;
@@ -19,7 +19,6 @@ this.toppings = {},
 this.size = size,
 this.crust = crust,
 this.glutenFree = glutenFree
-this.toppingIndex = 0
 }
 
 //The objects that will go into the Pizza properties
@@ -95,7 +94,7 @@ function Delivery(boolean, price) {
 //Order Methods
 
 Order.prototype.addPizza = function(pizza) {
-  let pizzaID = pizza.name;
+  let pizzaID = pizza.pizza;
   this.pizzas[pizzaID] = pizza;
 }
 
@@ -119,7 +118,7 @@ Order.prototype.pizzaCost = function () {
   let pizzas = this.pizzas;
   let array = Object.keys(pizzas);
   array.forEach(function(key){
-    totalPizzaPrice += pizzas[key].price
+    totalPizzaPrice += pizzas[key].totalCost;
   });
   return totalPizzaPrice;
 }
@@ -134,20 +133,45 @@ Order.prototype.condimentCost = function () {
   return totalCondimentPrice;
 }
 
-Order.prototype.condimentCost = function () {
-  let totalCondimentPrice = 0;
-  let condiments = this.condiments;
-  let array = Object.keys(condiments);
+Order.prototype.drinkCost = function () {
+  let totalDrinkPrice = 0;
+  let drinks = this.drinks;
+  let array = Object.keys(drinks);
   array.forEach(function(key){
-    totalCondimentPrice += condiments[key].price
+    totalDrinkPrice += drinks[key].price
   });
-  return totalCondimentPrice;
+  return totalDrinkPrice;
 }
 
+Order.prototype.otherCost = function () {
+  let totalOtherPrice = 0;
+  let others = this.others;
+  let array = Object.keys(others);
+  array.forEach(function(key){
+    totalOtherPrice += others[key].price
+  });
+  return totalOtherPrice;
+}
 
+Order.prototype.totalCostBeforeTip = function () {
+  let totalCost = this.pizzaCost();
+  totalCost += this.condimentCost();
+  totalCost += this.drinkCost();
+  totalCost += this.otherCost();
+  totalCost += this.delivery.price;
+  this.totalCost = totalCost;
+  return totalCost;
+}
 
+Order.prototype.totalCostWithTip = function () {
+  let grossCost = this.totalCost;
+  let tipPercent = this.gratuity/100;
+  let tipAmount = grossCost * tipPercent;
+  this.tipAmount = tipAmount;
+  return tipAmount + grossCost;
+}
 
-//Test Code
+//Test Code Pizza 
 
 let artichokes = new Topping("artichokes", 3);
 let anchovies = new Topping("anchovies", 3.5);
@@ -157,11 +181,33 @@ let crust = new Crust("thick", 4);
 let gF = new GlutenFree(false, 0);
 let margharita = new Pizza("margharita", size, crust, gF);
 margharita.addTopping(artichokes);
+margharita.addTopping(artichokes);
 margharita.addTopping(anchovies);
 margharita.addTopping(olives);
-console.log(margharita);
 margharita.totalCost();
+console.log(margharita);
 console.log(margharita.totalCost);
+//Test Code Order
+let cola = new Drink("CocaCola", "XL", 3);
+let ranch = new Condiment("ranch", .5);
+let tShirt = new Other("T-Shirt", 15);
+let deliver = new Delivery(true, 10);
+let robertIsHungry = new Order ("Robert", "971-998-8234", deliver, 25);
+robertIsHungry.addCondiment(ranch);
+robertIsHungry.addDrink(cola);
+robertIsHungry.addOther(tShirt);
+robertIsHungry.addPizza(margharita);
+console.log("***pizzaCost***", robertIsHungry.pizzaCost());
+console.log("***drinkCost***", robertIsHungry.drinkCost());
+console.log("***otherCost***", robertIsHungry.otherCost());
+console.log("***condimentCost***", robertIsHungry.condimentCost());
+console.log("***deliveryprice***", robertIsHungry.delivery.price);
+console.log("***totalCostBeforeTip***", robertIsHungry.totalCostBeforeTip());
+console.log("***this.totalCost***", robertIsHungry.totalCost);
+console.log("***totalCostWithTip***", robertIsHungry.totalCostWithTip());
+
+
+
 
 //User Interface Logic
 
