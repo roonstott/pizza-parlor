@@ -39,11 +39,12 @@ function Order (condiments, delivery, gratuity) {
 
 //Test Code
 
-let anchovies = new Topping("anchovies", 2.5);
+
 let artichokes = new Topping("artichokes", 3);
 let margharita = new Pizza("18", "thin", false);
+let anchovies = new Topping("anchovies", 2.5);
 margharita.addTopping(anchovies);
-margharita.addTopping(artichokes);
+// margharita.addTopping(artichokes);
 console.log(margharita);
 
 
