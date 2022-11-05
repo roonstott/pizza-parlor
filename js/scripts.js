@@ -173,41 +173,65 @@ Order.prototype.totalCostWithTip = function () {
 
 //Test Code Pizza 
 
-let artichokes = new Topping("artichokes", 3);
-let anchovies = new Topping("anchovies", 3.5);
-let olives = new Topping("olives", 2)
-let size = new Size("18 inch", 15);
-let crust = new Crust("thick", 4);
-let gF = new GlutenFree(false, 0);
-let margharita = new Pizza("margharita", size, crust, gF);
-margharita.addTopping(artichokes);
-margharita.addTopping(artichokes);
-margharita.addTopping(anchovies);
-margharita.addTopping(olives);
-margharita.totalCost();
-console.log(margharita);
-console.log(margharita.totalCost);
+// let artichokes = new Topping("artichokes", 3);
+// let anchovies = new Topping("anchovies", 3.5);
+// let olives = new Topping("olives", 2)
+// let size = new Size("18 inch", 15);
+// let crust = new Crust("thick", 4);
+// let gF = new GlutenFree(false, 0);
+// let margharita = new Pizza("margharita", size, crust, gF);
+// margharita.addTopping(artichokes);
+// margharita.addTopping(artichokes);
+// margharita.addTopping(anchovies);
+// margharita.addTopping(olives);
+// margharita.totalCost();
+// console.log(margharita);
+// console.log(margharita.totalCost);
+
 //Test Code Order
-let cola = new Drink("CocaCola", "XL", 3);
-let ranch = new Condiment("ranch", .5);
-let tShirt = new Other("T-Shirt", 15);
-let deliver = new Delivery(true, 10);
-let robertIsHungry = new Order ("Robert", "971-998-8234", deliver, 25);
-robertIsHungry.addCondiment(ranch);
-robertIsHungry.addDrink(cola);
-robertIsHungry.addOther(tShirt);
-robertIsHungry.addPizza(margharita);
-console.log("***pizzaCost***", robertIsHungry.pizzaCost());
-console.log("***drinkCost***", robertIsHungry.drinkCost());
-console.log("***otherCost***", robertIsHungry.otherCost());
-console.log("***condimentCost***", robertIsHungry.condimentCost());
-console.log("***deliveryprice***", robertIsHungry.delivery.price);
-console.log("***totalCostBeforeTip***", robertIsHungry.totalCostBeforeTip());
-console.log("***this.totalCost***", robertIsHungry.totalCost);
-console.log("***totalCostWithTip***", robertIsHungry.totalCostWithTip());
+// let cola = new Drink("CocaCola", "XL", 3);
+// let ranch = new Condiment("ranch", .5);
+// let tShirt = new Other("T-Shirt", 15);
+// let deliver = new Delivery(true, 10);
+// let robertIsHungry = new Order ("Robert", "971-998-8234", deliver, 25);
+// robertIsHungry.addCondiment(ranch);
+// robertIsHungry.addDrink(cola);
+// robertIsHungry.addOther(tShirt);
+// robertIsHungry.addPizza(margharita);
+// console.log("***pizzaCost***", robertIsHungry.pizzaCost());
+// console.log("***drinkCost***", robertIsHungry.drinkCost());
+// console.log("***otherCost***", robertIsHungry.otherCost());
+// console.log("***condimentCost***", robertIsHungry.condimentCost());
+// console.log("***deliveryprice***", robertIsHungry.delivery.price);
+// console.log("***totalCostBeforeTip***", robertIsHungry.totalCostBeforeTip());
+// console.log("***this.totalCost***", robertIsHungry.totalCost);
+// console.log("***totalCostWithTip***", robertIsHungry.totalCostWithTip());
 
 
 
 
 //User Interface Logic
 
+window.addEventListener("load", function(){
+  let form = document.getElementById("form");
+  form.addEventListener("submit", handleSubmit);
+});
+
+function handleSubmit (event) {
+  event.preventDefault();
+  const pizza = document.getElementById("pizza").value;
+  const size = document.getElementById("size").value;
+  const toppings = parseFloat(document.getElementById("toppings").value);
+  const style = parseFloat(document.getElementById("style").value);
+  const gf = parseFloat(document.getElementById("gf").value);
+  const drinks = parseFloat(document.getElementById("drinks").value);
+  const condiments = parseFloat(document.getElementById("condiments").value);
+  const other = parseFloat(document.getElementById("other").value);
+  const delivery = parseFloat(document.getElementById("delivery").value);
+  const tip = parseFloat(document.getElementById("tip").value);
+  const name = document.getElementById("name").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+
+  console.log(size);
+  
+};
