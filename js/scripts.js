@@ -2,45 +2,54 @@
 
 //The Two Primary Objects: Order and Pizza
 
-function Order (name, phone, delivery, gratuity) {
-  this.name = name,
-  this.phoneNumber = phone,
+function Order() {
   this.pizzas = {},
   this.condiments = {},
   this.drinks = {},
-  this.others = {},
-  this.delivery = delivery,
-  this.gratuity = gratuity
-}
+  this.others = {}
+};
 
-function Pizza(name, size, crust, glutenFree) {
-this.pizza = name;
+function Pizza(menuItem, size, style, glutenFree) {
+this.menuItem = menuItem;
 this.toppings = {},
 this.size = size,
-this.crust = crust,
+this.style = style,
 this.glutenFree = glutenFree
 }
+
+//this will be a global order object, to act as a database
+let order1 = new Order();
 
 //The objects that will go into the Pizza properties
 
 function Topping(name, price) {
   this.name = name,
-  this.price = price
+  this.price = parseFloat(price);
 }
 
 function Size(size, price) {
   this.size = size;
-  this.price = price;
+  this.price = parseInt(price)
 }
 
 function Crust(crust, price) {
   this.crust = crust;
-  this.price = price;
+  this.price = parseFloat(price);
 }
 
-function GlutenFree(boolean, price) {
-  this.glutenFree = boolean;
-  this.price = price;
+function GlutenFree(price) {
+  let gfValue = parseInt(price);
+  let cost;
+  let gfTorF;
+  if (gfValue) {
+    cost = gfValue;
+    gfTorF = true;
+  } else { 
+    cost = 0;
+    gfTorF = false;
+  }
+  this.price = cost;
+  this.glutenFree = gfTorF;
 }
 
 //Pizza methods
@@ -63,7 +72,7 @@ Pizza.prototype.toppingCost = function () {
 Pizza.prototype.totalCost = function () {
   let totalCost = this.toppingCost();
   totalCost += this.size.price;
-  totalCost += this.crust.price;
+  totalCost += this.style.price;
   totalCost += this.glutenFree.price;
   this.totalCost = totalCost; 
 }
@@ -72,28 +81,38 @@ Pizza.prototype.totalCost = function () {
 
 function Condiment(name, price) {
   this.name = name;
-  this.price = price;
+  this.price = parseFloat(price);
 }
 
-function Drink(name, size, price) {
+function Drink(name, price) {
   this.name = name;
-  this.size = size;
-  this.price = price;
+  this.price = parseFloat(price);
 }
 
 function Other(name, price) {
   this.name = name;
-  this.price = price;
+  this.price = parseFloat(price);
 }
 
-function Delivery(boolean, price) {
-  this.delivery = boolean;
-  this.price = price;
+function Delivery(price) {
+  let deliveryValue = parseInt(price);
+  let cost;
+  let deliverTorF;
+  if (deliveryValue) {
+    cost = deliveryValue;
+    deliverTorF = true;
+  } else { 
+    cost = 0;
+    deliverTorF = false;
+  }
+  this.price = cost;
+  this.delivery = deliverTorF;
 }
 
 //Order Methods
 
 Order.prototype.addPizza = function(pizza) {
+  pizza.totalCost();
   let pizzaID = pizza.pizza;
   this.pizzas[pizzaID] = pizza;
 }
@@ -111,6 +130,13 @@ Order.prototype.addDrink = function(drink) {
 Order.prototype.addOther = function(other) {
   let otherID = other.name;
   this.others[otherID] = other;
+}
+
+Order.prototype.inputCustomerInfo = function(customerName, phoneNumber, tip, delivery) {
+  this.customerName = customerName;
+  this.phoneNumber = phoneNumber;
+  this.gratuity = tip;
+  this.delivery = delivery;
 }
 
 Order.prototype.pizzaCost = function () {
@@ -164,11 +190,11 @@ Order.prototype.totalCostBeforeTip = function () {
 }
 
 Order.prototype.totalCostWithTip = function () {
-  let grossCost = this.totalCost;
-  let tipPercent = this.gratuity/100;
-  let tipAmount = grossCost * tipPercent;
+  let totalCost = this.totalCost;
+  let tipFraction = this.gratuity
+  let tipAmount = totalCost * tipFraction;
   this.tipAmount = tipAmount;
-  return tipAmount + grossCost;
+  return tipAmount + totalCost;
 }
 
 //Test Code Pizza 
@@ -219,19 +245,54 @@ window.addEventListener("load", function(){
 
 function handleSubmit (event) {
   event.preventDefault();
-  const pizza = document.getElementById("pizza").value;
-  const size = document.getElementById("size").value;
-  const toppings = parseFloat(document.getElementById("toppings").value);
-  const style = parseFloat(document.getElementById("style").value);
-  const gf = parseFloat(document.getElementById("gf").value);
-  const drinks = parseFloat(document.getElementById("drinks").value);
-  const condiments = parseFloat(document.getElementById("condiments").value);
-  const other = parseFloat(document.getElementById("other").value);
-  const delivery = parseFloat(document.getElementById("delivery").value);
-  const tip = parseFloat(document.getElementById("tip").value);
+
+  console.log(order1);
+  //Pizza
+  const menuItem = document.getElementById("menuItem").value;
+  const size = document.getElementById("size").value.split(":");
+  const topping = document.getElementById("toppings").value.split(":");
+  const style = document.getElementById("style").value.split(":");
+  const gf = document.getElementById("gf").value;
+
+  let sizeObj = new Size(size[1], size[0]);
+  let toppingObj = new Topping(topping[1], topping[0]);
+  let styleObj = new Crust(style[1], style[0]);
+  let gfObj = new GlutenFree(gf);
+
+  //Making the Pizza object
+
+  let pizzaObj = new Pizza(menuItem, sizeObj, styleObj, gfObj);
+  pizzaObj.addTopping(toppingObj);
+  
+  //Other Order Items
+
+  const drink = document.getElementById("drinks").value.split(":");
+  const condiment = document.getElementById("condiments").value.split(":");
+  const other = document.getElementById("other").value.split(":");
+  
+  let drinkObj = new Drink(drink[1], drink[0]);
+  let condimentObj = new Condiment(condiment[1], condiment[0]);
+  let otherObj = new Other(other[1], other[0]);
+  
+  //Customer Info
+
   const name = document.getElementById("name").value;
   const phoneNumber = document.getElementById("phoneNumber").value;
+  const tip = parseFloat(document.getElementById("tip").value);
+  const delivery = document.getElementById("delivery").value;
 
-  console.log(size);
+  let deliveryObj = new Delivery(delivery);
   
+  //Updating the Order object
+
+  order1.addPizza(pizzaObj);
+  order1.addCondiment(condimentObj);
+  order1.addDrink(drinkObj);
+  order1.addOther(otherObj);
+  order1.inputCustomerInfo(name, phoneNumber, tip, deliveryObj);
+
+  console.log(order1);
+  console.log(order1.totalCostBeforeTip());
+  console.log(order1.totalCostWithTip());
+
 };
