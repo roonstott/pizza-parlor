@@ -87,11 +87,20 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" id="row5">
         <div class="col-4">
           <h5>Drinks</h5>
+        </div>
+        <div class="col-4">
+          <h5>Condiments</h5>
+        </div>
+        <div class="col-4">
+          <h5>Apparrel</h5>
+        </div>
+      </div>
+      <div class="row" id="row6">
+        <div class="col-2">
           <select id="drinks">
-            <option value="0:none">--none--</option>
             <option value="0:Water">Water (free)</option>
             <option value="1:Cola">Cola ($1.00)</option>
             <option value="0.5:Milk">Milk ($0.50</option>
@@ -100,27 +109,80 @@
             <option value="0.75:Lemonade">Lemonade ($0.75)</option>
           </select>
         </div>
-        <div class="col-4">
-          <h5>Condiments</h5>
+        <div class="col-2">
+          <select id="drinkQty">
+            <option value="1">qty 1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+        <div class="col-2">
           <select id="condiments">
-            <option value="0:none">--none--</option>
             <option value="0.5:Ranch">Ranch ($0.50)</option>
             <option value="0.5:Spicy Honey">Spicy Honey ($0.50)</option>
             <option value="0.1:Mustard">Mustard ($0.10)</option>
           </select>
         </div>
-        <div class="col-4">
-          <h5>Other Stuff</h5>
+        <div class="col-2">
+          <select id="condoQty">
+            <option value="1">qty 1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+        <div class="col-2">
           <select id="other">
-            <option value="0:none">--none--</option>
             <option value="4:Hat">Hat ($4.00)</option>
             <option value="3:T-shirt">T-shirt ($3.00)</option>
             <option value="500:Cashmere Evening Gown">Cashmere Evening Gown ($500)</option>
           </select>
         </div>
+        <div class="col-2">
+          <select id="otherQty">
+            <option value="1">qty 1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
       </div>
-
-      <div class="row">
+      <div class="row" id="row7">
+        <div class="col-4">
+          <button type="click" id="drinkBtn">Bottoms Up</button>
+        </div>
+        <div class="col-4">
+          <button type="click" id="condoBtn">Add Sauce</button>
+        </div>
+        <div class="col-4">
+          <button type="click" id="otherBtn">Dress Me Up</button>
+        </div>
+      </div>
+      <div class="row" id="row8">
+        <div class="col-4">
+          <p id="drinkList"></p>
+        </div>
+        <div class="col-4">
+          <p id="condoList"></p>
+        </div>
+        <div class="col-4">
+          <p id="otherList"></p>
+        </div>
+      </div>
+      <div class="row" id ="row9">
         <div class="col-4">
           <h5>Delivery or Pickup in Store</h5>
           <select id="delivery">
