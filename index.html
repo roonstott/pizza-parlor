@@ -9,32 +9,51 @@
 <body>
   <div class="container">
     <h1>Welcome to the Little Pizza Parlor</h1>
-    <h2>Please place your order</h2>
-    <form id="form">
       <div class="row" id="row1">
-        <div class="col-4">
-          <h3>Menu</h3>
+        <div class="col-6">
+          <h2>Menu</h2>
+            <h5>Cheese</h5>
+            <p>Simplicity perfected in this classic cheese pizza, made with artisan mozzerella and a house roasted tomato marinara and fresh basil</p>
+            <h5>Pepperoni</h5>
+            <p>Add on spicy rounds of organic Italian salami</p>
+            <h5>Margherita</h5>
+            <p>Tomato sauce, mozzarella, basil, oregano, olive oil</p>
+            <h5>Mushroom</h5>
+            <p>FARMED & FORAGED MUSHROOMS, MOZZARELLA, PROVOLONE, GARLIC PUREE</p>
+            <h5>Hawaiian</h5>
+            <p>pizza sauce, cheese, cooked ham, and pineapple</p>
+            <h5>Meatlovers Scream (vegan)</h5>
+            <p>tomato sauce, roasted mushrooms, piquillo peppers, kale, mustard greens, calabrian chili-garlic oil, & sicilian oregano</p>
+        </div>
+        <div class="col-6" id="pizzaSelect">
+          <h4>Choose Your Pizza</h4><br>
           <select id="menuItem">
             <option>Cheese</option>
             <option>Pepperoni</option>
-            <option>Margharita</option>
+            <option>Margherita</option>
             <option>Mushroom</option>
             <option>Hawaiian</option>
-            <option>Eggplant Parm</option>
             <option>Meat Lovers Scream (vegan)</option>
           </select><br>
-        </div>
-        <div class="col-2">
-          <h4>Size</h4>
+          <h5>What Size Would You Like?</h5><br>
           <select id="size">
             <option value="5:12 inch" value="12 inch">12" ($5)</option>
             <option value="10:16 inch">16" ($10)</option>
             <option value="15:24 inch">24" ($15)</option>
             <option value="17:36 inch">36" ($17)</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <h5>Toppings</h5>
+          </select><br>
+          <h5>Style</h5><br>
+          <select id="style">
+            <option value="0:Classic Thin Crust">Classic Thin Crust</option> 
+            <option value="1:Deep Dish">Deep Dish (+$1.00</option>
+            <option value="38:Deep Fried">Deep Fried (+$38.00</option>
+          </select><br>
+          <h5>Gluten Free</h5><br>
+          <select id="gf">
+            <option value="">I'm fine with gluten</option><br>
+            <option value="3">Gluten will kill me (+$3.00)</option>
+          </select><br>
+          <h5>Add Toppings</h5><br>
           <select id="toppings">
             <option value="0:none">--none--</option>
             <option value="1:Artichokes">Artichokes ($1.00)</option>
@@ -44,24 +63,31 @@
             <option value="0.5:Roasted Garlic">Roasted Garlic($0.50)</option>
             <option value="2:Extra Cheese">Extra Cheese($2.00)</option> 
           </select>
-        </div>
-        <div class="col-2">
-          <h5>Style</h5>
-          <select id="style">
-            <option value="0:Classic Thin Crust">Classic Thin Crust</option> 
-            <option value="1:Deep Dish">Deep Dish (+$1.00</option>
-            <option value="38:Deep Fried">Deep Fried (+$38.00</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <h5>Gluten Free</h5>
-          <select id="gf">
-            <option value="">I'm fine with gluten</option>
-            <option value="3">Gluten will kill me (+$3.00)</option>
-          </select>
+          <span id="toppingButton"><button type="click" id="addTopping">Add Topping</button></span><br>
+          <p id="toppingDisplay"></p>
         </div>
       </div>
       <div class="row" id="row2">
+        <button type="click" id="addPizza">Add Pizza To Your Order</button><br>
+      </div>
+      <div class="row" id="row3">
+        <div class ="col-3">
+          <h3>Pizzas In Your Order:</h3><br>
+        </div>
+        <div class="col-9">
+          <p id="pizzaDisplay"></p>
+        </div>
+      </div>
+      <div class="row" id="row4">
+        <div class ="col-3">
+          <h3> Pizza Total:</h3><br>
+        </div>
+        <div class="col-9">
+          <p id="pizzaPriceDisplay"></p>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-4">
           <h5>Drinks</h5>
           <select id="drinks">
@@ -93,7 +119,8 @@
           </select>
         </div>
       </div>
-      <div class="row" id="row3">
+
+      <div class="row">
         <div class="col-4">
           <h5>Delivery or Pickup in Store</h5>
           <select id="delivery">
@@ -120,8 +147,7 @@
           <input id="phoneNumber" type="text">
         </div>
       </div>
-      <button type="submit">Place Order</button>
-    </form>
+
   </div>  
 </body>
 </html>

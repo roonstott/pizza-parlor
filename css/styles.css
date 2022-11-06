@@ -1,7 +1,43 @@
 #row1 {
   margin: 4%;
+  text-align: center;
 }
 
 #row2 {
-  margin: 4%;
+  margin-left: 30%;
+  margin-top: 7%;
+  margin-bottom: 10%;
+  padding:2%;
+  font-size: 25px;
+}
+
+#row3 {
+  margin-left: 2%;
+}
+
+#toppingButton {
+  margin-right: 4%;
+}
+
+#pizzaSelect {
+  margin-top: 4%;
+  padding: 3%;
+  text-align: center;
+}
+
+#menuItem{
+  margin-bottom: 7%;
+}
+
+#size {
+  
+  margin-bottom: 7%;
+}
+
+#style {
+  margin-bottom: 7%;
+}
+
+#gf {
+  margin-bottom: 7%;
 }
