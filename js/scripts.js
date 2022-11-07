@@ -120,7 +120,7 @@ Order.prototype.inputCustomerInfo = function(customerName, phoneNumber, tip, del
   this.delivery = delivery;
 }
 
-Order.prototype.pizzaCost = function () {
+Order.prototype.pizzaCost = function() {
   let totalPizzaPrice = 0;
   this.pizzas.forEach(function(pizza){
     totalPizzaPrice += pizza.totalCost();
@@ -128,37 +128,31 @@ Order.prototype.pizzaCost = function () {
   return totalPizzaPrice;
 }
 
-Order.prototype.condimentCost = function () {
+Order.prototype.condimentCost = function() {
   let totalCondimentPrice = 0;
-  let condiments = this.condiments;
-  let array = Object.keys(condiments);
-  array.forEach(function(key){
-    totalCondimentPrice += condiments[key].price
+  this.condiments.forEach(function(condiment){
+    totalCondimentPrice += condiment.totalPrice;
   });
   return totalCondimentPrice;
 }
 
-Order.prototype.drinkCost = function () {
+Order.prototype.drinkCost = function() {
   let totalDrinkPrice = 0;
-  let drinks = this.drinks;
-  let array = Object.keys(drinks);
-  array.forEach(function(key){
-    totalDrinkPrice += drinks[key].price
+  this.drinks.forEach(function(drink){
+    totalDrinkPrice += drink.totalPrice;
   });
   return totalDrinkPrice;
 }
 
-Order.prototype.otherCost = function () {
+Order.prototype.otherCost = function() {
   let totalOtherPrice = 0;
-  let others = this.others;
-  let array = Object.keys(others);
-  array.forEach(function(key){
-    totalOtherPrice += others[key].price
+  this.others.forEach(function(other){
+    totalOtherPrice += other.totalPrice;
   });
   return totalOtherPrice;
 }
 
-Order.prototype.totalCostBeforeTip = function () {
+Order.prototype.totalCostBeforeTip = function() {
   let totalCost = this.pizzaCost();
   totalCost += this.condimentCost();
   totalCost += this.drinkCost();
@@ -168,7 +162,7 @@ Order.prototype.totalCostBeforeTip = function () {
   return totalCost;
 }
 
-Order.prototype.totalCostWithTip = function () {
+Order.prototype.totalCostWithTip = function() {
   let totalCost = this.totalCost;
   let tipFraction = this.gratuity
   let tipAmount = totalCost * tipFraction;
@@ -189,7 +183,103 @@ window.addEventListener("load", function(){
   condoButton.addEventListener("click", insertCondiment);
   let otherButton = document.getElementById("otherBtn");
   otherButton.addEventListener("click", insertOther);
+  let reviewButton = document.getElementById("reviewBtn");
+  reviewButton.addEventListener("click", reviewOrder);
 });
+
+//function reviewOrder
+
+function reviewOrder(event) {
+  event.preventDefault();
+  const orderReview = document.getElementById("orderReview");
+  orderReview.innerHTML = "";
+
+  //Customer Info
+
+  const name = document.getElementById("name").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const tip = parseFloat(document.getElementById("tip").value);
+  const delivery = document.getElementById("delivery").value;
+
+  let deliveryObj = new Delivery(delivery);
+  
+  order1.inputCustomerInfo(name, phoneNumber, tip, deliveryObj);
+
+  //Displaying Order Summary
+
+  const h3Cust = document.createElement("h3");
+  h3Cust.append("Customer Info");
+  orderReview.append(h3Cust);
+  liCustName = document.createElement("li");
+  liCustNum = document.createElement("li");
+  liCustName.innerHTML = name;
+  liCustNum = phoneNumber;
+  orderReview.append(liCustName);
+  orderReview.append(liCustNum);
+
+  const h3Piz = document.createElement("h3");
+  h3Piz.innerHTML = "Pizzas";
+  orderReview.append(h3Piz);
+  
+  order1.pizzas.forEach(function(pizza){
+    const li = document.createElement("li");
+    li.append(pizza.receiptMessage);
+    orderReview.append(li);
+  });
+
+  const h3Drink = document.createElement("h3");
+  h3Drink.innerHTML = "Drinks";
+  orderReview.append(h3Drink);
+  
+  order1.drinks.forEach(function(drink){
+    const li = document.createElement("li");
+    li.append(drink.receiptMessage);
+    orderReview.append(li);
+  })
+
+  const h3Condo = document.createElement("h3");
+  h3Condo.innerHTML = "Condiments";
+  orderReview.append(h3Condo);
+  
+  order1.condiments.forEach(function(condo){
+    const li = document.createElement("li");
+    li.append(condo.receiptMessage);
+    orderReview.append(li);
+  });
+
+  const h3Other = document.createElement("h3");
+  h3Other.innerHTML = "Apparrel";
+  orderReview.append(h3Other);
+  
+  order1.others.forEach(function(other){
+    const li = document.createElement("li");
+    li.append(other.receiptMessage);
+    orderReview.append(li);
+  })
+
+  const h3Del = document.createElement("h3");
+  const liDel = document.createElement("li");
+  if (order1.delivery.delivery) {
+    h3Del.innerHTML = "Delivery";
+    liDel.append("$5.00");
+  } else {
+    h3Del.innerHTML = "In-Store-Pickup"
+    liDel.append("No Charge");
+  };
+  orderReview.append(h3Del);
+  orderReview.append(liDel);
+
+  const h3Sub = document.createElement("h3");
+  const liSub = document.createElement("li");
+  h3Sub.innerHTML = `SubTotal: $${order1.totalCostBeforeTip()}`;
+  orderReview.append(h3Sub);
+  liSub.append(`Plus ${order1.gratuity * 100}% tip`)
+  orderReview.append(liSub);
+  
+  const h3Grand = document.createElement("h3");
+  h3Grand.innerHTML = `Total With Tip is $${order1.totalCostWithTip()}`
+  orderReview.append(h3Grand)
+}
 
 //function insertDrink
 
@@ -203,7 +293,8 @@ function insertDrink(event) {
   const drinkList = document.getElementById("drinkList");
   const li = document.createElement("li");
   li.append(`${drink[1]} x ${qty}:   $${drinkObj.totalPrice}`);
-  drinkList.append(li);  
+  drinkList.append(li);
+  drinkObj.receiptMessage = li.innerText;
 }
 
 //function insertCondiment
@@ -218,6 +309,7 @@ function insertCondiment(event) {
   const li = document.createElement("li");
   li.append(`${condo[1]} x ${qty}:   $${condoObj.totalPrice}`);
   condoList.append(li);  
+  condoObj.receiptMessage = li.innerText;
 }
 
 //function insertOther
@@ -231,7 +323,8 @@ function insertOther(event) {
   const otherList = document.getElementById("otherList");
   const li = document.createElement("li");
   li.append(`${other[1]} x ${qty}:   $${otherObj.totalPrice}`);
-  otherList.append(li);  
+  otherList.append(li);
+  otherObj.receiptMessage = li.innerText;
 }
 
 //function insertPizza
@@ -271,6 +364,8 @@ function insertPizza(event) {
   li.append(`) $${pizzaObj.totalCost()}`)
   pizDisp.append(li);
 
+  pizzaObj.receiptMessage = li.innerText;
+
   const pizPriceDisp = document.getElementById("pizzaPriceDisplay");
   pizPriceDisp.innerHTML=(`$${order1.pizzaCost()}`);
 
@@ -297,13 +392,4 @@ function insertTopping(event) {
 
 
   
-  // //Customer Info
-
-  // const name = document.getElementById("name").value;
-  // const phoneNumber = document.getElementById("phoneNumber").value;
-  // const tip = parseFloat(document.getElementById("tip").value);
-  // const delivery = document.getElementById("delivery").value;
-
-  // let deliveryObj = new Delivery(delivery);
   
-  // order1.inputCustomerInfo(name, phoneNumber, tip, deliveryObj);
