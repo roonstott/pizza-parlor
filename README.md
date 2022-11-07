@@ -21,7 +21,7 @@ Using object-oriented JavaScript, this site takes in customer input and stores t
 * _Clone the repository to your own machine_
 * _Open the index.html folder using a web browser of your choice_
 * _Internet connection is required in order to enjoy all styling features_
-* _Go through the site and choose the selections that apply to the pizza that you want. You can add as many toppings as you want before adding the pizza to your order, and youcan add as many pizzas, drinks, condiments, and apparel items to your order as you want before selecting 'Review Order' to see your receipt and final price. _ 
+* Go through the site and choose the selections that apply to the pizza that you want. You can add as many toppings as you want before adding the pizza to your order, and youcan add as many pizzas, drinks, condiments, and apparel items to your order as you want before selecting 'Review Order' to see your receipt and final price. 
 
 ## Test Driven Development
 
