@@ -1,3 +1,30 @@
+
+# _Pizza Parlor_
+
+#### By _**Robert Onstott**_
+
+#### _An ordering platform for a hypothetical pizza shop. Customers can input their order options and find out the price_
+
+## Technologies Used
+
+* _HTML_
+* _JavaScript_
+* _CSS_
+* _Bootstrap_
+
+## Description
+
+_Using object-oriented JavaScript, this site takes in customer input and stores their order in order, pizza, topping, gluten-free, condiment, drink, apparel, and delivery items, creating an information structure for the customer order that can generate a receipt for the customer, and an order ticket for the restaurant. _
+
+## Setup/Installation Requirements
+
+* _Clone the repository to your own machine_
+* _Open the index.html folder using a web browser of your choice_
+* _Internet connection is required in order to enjoy all styling features_
+* _Go through the site and choose the selections that apply to the pizza that you want. You can add as many toppings as you want before adding the pizza to your order, and youcan add as many pizzas, drinks, condiments, and apparel items to your order as you want before selecting 'Review Order' to see your receipt and final price. _ 
+
+## Test Driven Development
+
 ```Describe: function Pizza(name, size, crust, glutenFree)
 
 Test: "It should create a new pizza object with size, crust, and glutenFree properties, as well as an empty topping object"
@@ -129,3 +156,22 @@ console.log(margharita.totalCost);
 Expected Output: 
   totalCost: 27.5
  ```
+
+## Known Bugs
+
+* _No Known Bugs_
+
+## License
+
+_GPL_
+
+Copyright (c) _NOV 2022_ _Robert Onstott_
+
+
+
+
+
+
+
+
+

@@ -167,7 +167,7 @@ Order.prototype.totalCostWithTip = function() {
   let tipFraction = this.gratuity
   let tipAmount = totalCost * tipFraction;
   this.tipAmount = tipAmount;
-  return tipAmount + totalCost;
+  return (tipAmount + totalCost).toFixed(2);
 }
 
 //***User Interface Logic: ***
