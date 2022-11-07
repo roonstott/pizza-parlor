@@ -14,7 +14,7 @@
 
 ## Description
 
-_Using object-oriented JavaScript, this site takes in customer input and stores their order in order, pizza, topping, gluten-free, condiment, drink, apparel, and delivery items, creating an information structure for the customer order that can generate a receipt for the customer, and an order ticket for the restaurant. _
+Using object-oriented JavaScript, this site takes in customer input and stores their order in order, pizza, topping, gluten-free, condiment, drink, apparel, and delivery items, creating an information structure for the customer order that can generate a receipt for the customer, and an order ticket for the restaurant.
 
 ## Setup/Installation Requirements
 
